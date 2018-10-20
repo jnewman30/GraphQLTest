@@ -33,4 +33,10 @@
     <ProjectReference Include="..\GraphLib\GraphLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

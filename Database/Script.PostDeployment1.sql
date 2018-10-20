@@ -1,4 +1,20 @@
-[
+﻿/*
+Post-Deployment Script Template							
+--------------------------------------------------------------------------------------
+ This file contains SQL statements that will be appended to the build script.		
+ Use SQLCMD syntax to include a file in the post-deployment script.			
+ Example:      :r .\myfile.sql								
+ Use SQLCMD syntax to reference a variable in the post-deployment script.		
+ Example:      :setvar TableName MyTable							
+               SELECT * FROM [$(TableName)]					
+--------------------------------------------------------------------------------------
+*/
+
+DELETE HasMembers
+DELETE Roles
+DELETE Users
+
+DECLARE @UserJson varchar(max) = '[
   {
     "id": "5bcb9f09a21aff276f66c3a1",
     "firstName": "Frederick",
@@ -159,4 +175,17 @@
     "userName": "ryan.shannon@nurali.me",
     "email": "ryan.shannon@nurali.me"
   }
-]
+]'
+
+INSERT INTO Users ( Id, UserName, Email, FirstName, LastName, Company )
+SELECT Id, UserName, Email, FirstName, LastName, Company
+FROM OPENJSON(@UserJson)
+ WITH (
+	id nvarchar(128), 
+	userName nvarchar(25), 
+	email nvarchar(255), 
+	firstName nvarchar(50), 
+	lastName nvarchar(50),
+	company nvarchar(255),
+	dateCreated datetimeoffset(7)
+)

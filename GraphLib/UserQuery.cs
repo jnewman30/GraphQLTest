@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using DataLib.Model;
+using DataLib.Repos;
 using GraphLib.GraphModel;
 using GraphLib.Interfaces;
-using GraphLib.Model;
 using GraphQL.Types;
 
 namespace GraphLib

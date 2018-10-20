@@ -1,4 +1,4 @@
-﻿using GraphLib.Model;
+﻿using DataLib.Model;
 using GraphQL.Types;
 
 namespace GraphLib.GraphModel
@@ -13,6 +13,7 @@ namespace GraphLib.GraphModel
             Field(x => x.FirstName, type: typeof(StringGraphType));
             Field(x => x.LastName, type: typeof(StringGraphType));
             Field(x => x.Company, type: typeof(StringGraphType));
+            Field(x => x.DateCreated, type: typeof(DateTimeGraphType));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace GraphQLTest
 {
@@ -12,8 +13,12 @@ namespace GraphQLTest
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+                               .AddJsonFile("./settings.json")
+                               .Build();
             return WebHost
                   .CreateDefaultBuilder(args)
+                  .UseConfiguration(configuration)
                   .UseStartup<Startup>();
         }
     }

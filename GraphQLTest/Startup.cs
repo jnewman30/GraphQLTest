@@ -1,4 +1,6 @@
-﻿using GraphLib;
+﻿using DataLib;
+using DataLib.Repos;
+using GraphLib;
 using GraphLib.Interfaces;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
@@ -26,6 +28,7 @@ namespace GraphQLTest
         public void ConfigureServices(IServiceCollection services)
         {
             services
+               .AddSingleton<IMasterDb, MasterDb>()
                .AddSingleton<IUserRepo, UserRepo>()
                .AddSingleton<IUserQuery, UserQuery>()
                .AddSingleton<IUserMutation, UserMutation>()

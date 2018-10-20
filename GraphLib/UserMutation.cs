@@ -1,6 +1,8 @@
-﻿using GraphLib.GraphModel;
+﻿using System;
+using DataLib.Model;
+using DataLib.Repos;
+using GraphLib.GraphModel;
 using GraphLib.Interfaces;
-using GraphLib.Model;
 using GraphQL.Types;
 
 namespace GraphLib
@@ -11,18 +13,38 @@ namespace GraphLib
         {
             UserRepo = userRepo;
 
-            Field<UserGraphType>("update",
+            Field<UserGraphType>("create",
                                  arguments: new QueryArguments(
                                      new QueryArgument<StringGraphType> {Name = "id"},
-                                     new QueryArgument<StringGraphType> {Name = "firstName"}),
-                                 resolve: UpdateUser);
+                                     new QueryArgument<StringGraphType> {Name = "userName"},
+                                     new QueryArgument<StringGraphType> {Name = "email"},
+                                     new QueryArgument<StringGraphType> {Name = "firstName"},
+                                     new QueryArgument<StringGraphType> {Name = "lastName"},
+                                     new QueryArgument<StringGraphType> {Name = "company"}),
+                                 resolve: CreateUser);
         }
 
         private IUserRepo UserRepo { get; }
 
-        private User UpdateUser(ResolveFieldContext<object> arg)
+        private User CreateUser(ResolveFieldContext<object> context)
         {
-            return null;
+            var id = context.GetArgument<string>("id");
+            var userName = context.GetArgument<string>("userName");
+            var email = context.GetArgument<string>("email");
+            var firstName = context.GetArgument<string>("firstName");
+            var lastName = context.GetArgument<string>("lastName");
+            var company = context.GetArgument<string>("company");
+
+            return UserRepo.Create(new User
+                                   {
+                                       Id = id,
+                                       UserName = userName,
+                                       Email = email,
+                                       FirstName = firstName,
+                                       LastName = lastName,
+                                       Company = company,
+                                       DateCreated = DateTime.Now
+                                   });
         }
     }
 }
