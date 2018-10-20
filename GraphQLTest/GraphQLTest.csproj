@@ -5,14 +5,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Schemas\**" />
+    <Content Remove="Schemas\**" />
+    <EmbeddedResource Remove="Schemas\**" />
+    <None Remove="Schemas\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GraphQL.Server.Core" Version="3.1.0" />
-    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.1.0" />
-    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.1.0" />
+    <PackageReference Include="GraphQL" Version="2.3.0" />
+    <PackageReference Include="GraphQL.Server.Core" Version="3.2.0" />
+    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.2.0" />
+    <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.2.0" />
+    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.2.0" />
+    <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="2.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="2.8.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GraphLib\GraphLib.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,8 @@
-﻿using GraphQL.Server;
+﻿using GraphLib;
+using GraphLib.Interfaces;
+using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
-using GraphQLTest.Schemas.Dynamic;
+using GraphQL.Server.Ui.Voyager;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,16 +26,18 @@ namespace GraphQLTest
         public void ConfigureServices(IServiceCollection services)
         {
             services
-               .AddSingleton<DynamicQuery>()
-               .AddSingleton<DynamicSchema>();
+               .AddSingleton<IUserRepo, UserRepo>()
+               .AddSingleton<IUserQuery, UserQuery>()
+               .AddSingleton<IUserMutation, UserMutation>()
+               .AddSingleton<MasterSchema>();
 
-            // Add GraphQL services and configure options
-            services.AddGraphQL(options =>
-                     {
-                         options.EnableMetrics = true;
-                         options.ExposeExceptions = Environment.IsDevelopment();
-                     })
-                    .AddDataLoader();
+            services
+               .AddGraphQL();
+//               .AddWebSockets()
+//               .AddDataLoader();
+
+            services
+               .AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,10 +48,13 @@ namespace GraphQLTest
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseGraphQL<DynamicSchema>("/graphql");
+            app
+               .UseGraphQL<MasterSchema>()
+               .UseGraphQLWebSockets<MasterSchema>()
+               .UseGraphQLPlayground(new GraphQLPlaygroundOptions())
+               .UseGraphQLVoyager(new GraphQLVoyagerOptions());
 
-            // use graphql-playground middleware at default url /ui/playground
-            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+            app.UseMvc();
         }
     }
 }
