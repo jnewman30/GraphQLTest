@@ -1,9 +1,9 @@
 ﻿using DataLib.Model;
 using GraphQL.Types;
 
-namespace GraphLib.GraphModel
+namespace GraphLib.Model.User
 {
-    public class UserGraphType : ObjectGraphType<User>
+    public class UserGraphType : ObjectGraphType<DataLib.Model.User>
     {
         public UserGraphType()
         {

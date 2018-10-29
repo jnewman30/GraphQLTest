@@ -62,6 +62,11 @@
     <Build Include="Users.sql" />
     <Build Include="Roles.sql" />
     <Build Include="HasMembers.sql" />
+    <Build Include="DataAdapterTypes.sql" />
+    <Build Include="DataAdapters.sql" />
+    <Build Include="Properties.sql" />
+    <Build Include="HasProperty.sql" />
+    <Build Include="PropertyTypes.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

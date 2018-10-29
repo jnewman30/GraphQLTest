@@ -1,7 +1,8 @@
 ﻿using DataLib;
 using DataLib.Repos;
 using GraphLib;
-using GraphLib.Interfaces;
+using GraphLib.Model.User;
+using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using GraphQL.Server.Ui.Voyager;
@@ -28,19 +29,17 @@ namespace GraphQLTest
         public void ConfigureServices(IServiceCollection services)
         {
             services
-               .AddSingleton<IMasterDb, MasterDb>()
-               .AddSingleton<IUserRepo, UserRepo>()
-               .AddSingleton<IUserQuery, UserQuery>()
-               .AddSingleton<IUserMutation, UserMutation>()
-               .AddSingleton<MasterSchema>();
+                .AddSingleton<IMasterDb, MasterDb>()
+                .AddSingleton<IUserRepo, UserRepo>()
+                .AddSingleton<IRootQuery, RootQuery>()
+                .AddSingleton<IRootMutation, RootMutation>()
+                .AddSingleton<IMasterSchema, MasterSchema>();
 
             services
-               .AddGraphQL();
-//               .AddWebSockets()
-//               .AddDataLoader();
+                .AddGraphQL();
 
             services
-               .AddMvc();
+                .AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,10 +51,9 @@ namespace GraphQLTest
             }
 
             app
-               .UseGraphQL<MasterSchema>()
-               .UseGraphQLWebSockets<MasterSchema>()
-               .UseGraphQLPlayground(new GraphQLPlaygroundOptions())
-               .UseGraphQLVoyager(new GraphQLVoyagerOptions());
+                .UseGraphQL<IMasterSchema>()
+                .UseGraphQLPlayground(new GraphQLPlaygroundOptions())
+                .UseGraphQLVoyager(new GraphQLVoyagerOptions());
 
             app.UseMvc();
         }

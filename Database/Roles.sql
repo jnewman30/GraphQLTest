@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Roles]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] BIGINT NOT NULL PRIMARY KEY, 
     [Name] NVARCHAR(50) NOT NULL
 ) AS Node;

@@ -9,10 +9,7 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-
-DELETE HasMembers
-DELETE Roles
-DELETE Users
+INSERT INTO DataAdapterTypes ( [Name] ) VALUES ( 'GraphQL' )
 
 DECLARE @UserJson varchar(max) = '[
   {

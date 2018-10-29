@@ -6,10 +6,12 @@ namespace DataLib.Model
     [Table("Roles")]
     public class Role
     {
-        public string Id { get; set; }
+        [Key]
+        public long Id { get; set; }
 
         public string Name { get; set; }
 
+        [Computed]
         public IEnumerable<User> Users { get; set; }
     }
 }

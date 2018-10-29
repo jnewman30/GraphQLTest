@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using DataLib.Model;
 using DataLib.Repos;
-using GraphLib.GraphModel;
-using GraphLib.Interfaces;
+using GraphLib.Model.User;
 using GraphQL.Types;
 
 namespace GraphLib
 {
-    public class UserQuery : ObjectGraphType, IUserQuery
+    public class RootQuery : ObjectGraphType, IRootQuery
     {
-        public UserQuery(IUserRepo userRepo)
+        public RootQuery(IUserRepo userRepo)
         {
             UserRepo = userRepo;
 

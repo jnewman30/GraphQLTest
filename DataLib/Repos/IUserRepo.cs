@@ -1,16 +1,9 @@
-﻿using System.Collections.Generic;
-using DataLib.Model;
+﻿using DataLib.Model;
 
 namespace DataLib.Repos
 {
-    public interface IUserRepo
+    public interface IUserRepo : IRepo<User, string>
     {
-        IEnumerable<User> GetAll();
-
-        User GetById(string id);
-
         User GetByEmail(string email);
-
-        User Create(User user);
     }
 }

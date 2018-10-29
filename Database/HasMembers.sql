@@ -1,4 +1,2 @@
-﻿CREATE TABLE [dbo].[HasMembers]
-(
-	[Metadata] nvarchar(max)
-) AS EDGE;
+﻿CREATE TABLE [dbo].[HasMembers] 
+AS EDGE;
