@@ -1,5 +1,4 @@
-﻿using DataLib.Model;
-using GraphQL.Types;
+﻿using GraphQL.Types;
 
 namespace GraphLib.Model.User
 {

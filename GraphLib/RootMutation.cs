@@ -1,6 +1,7 @@
 ﻿using System;
 using DataLib.Model;
 using DataLib.Repos;
+using GraphLib.Interfaces;
 using GraphLib.Model.User;
 using GraphQL.Types;
 

@@ -1,11 +1,12 @@
-﻿using GraphQL.Types;
+﻿using GraphLib.Interfaces;
+using GraphQL.Types;
 
 namespace GraphLib
 {
     public class MasterSchema : Schema, IMasterSchema
     {
         public MasterSchema(
-            IRootQuery query, 
+            IRootQuery query,
             IRootMutation mutation)
         {
             Query = query;

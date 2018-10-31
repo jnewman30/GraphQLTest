@@ -1,6 +1,6 @@
 ﻿using GraphQL.Types;
 
-namespace GraphLib
+namespace GraphLib.Interfaces
 {
     public interface IMasterSchema : ISchema
     {

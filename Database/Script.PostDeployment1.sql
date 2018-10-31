@@ -186,3 +186,4 @@ FROM OPENJSON(@UserJson)
 	company nvarchar(255),
 	dateCreated datetimeoffset(7)
 )
+
