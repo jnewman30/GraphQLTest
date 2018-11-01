@@ -9,7 +9,6 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-INSERT INTO DataAdapterTypes ( [Name] ) VALUES ( 'GraphQL' )
 
 DECLARE @UserJson varchar(max) = '[
   {
@@ -187,3 +186,32 @@ FROM OPENJSON(@UserJson)
 	dateCreated datetimeoffset(7)
 )
 
+SET IDENTITY_INSERT DataAdapterTypes ON
+INSERT INTO DataAdapterTypes ( [Id], [Name] ) VALUES ( 1, 'GraphQL' )
+SET IDENTITY_INSERT DataAdapterTypes OFF
+
+INSERT INTO DataAdapters ( [AdapterTypeId], [Name], [Endpoint], [Metadata] ) 
+VALUES ( 1, 'UserTest', 'https://qa.rhooster.com/services/api/graph/query',
+'{
+	"query": "{
+		queryDts( $entity: String!, table: String! ) { 
+			id 
+			name 
+			daysFromAppointment 
+			sender 
+			emailTemplateId 
+			fromNumber 
+			smsTemplateId 
+		} 
+	}",
+	"variables": {
+		"entity": "The Vision Clinic",
+		"table": "EHRNotificationSettings"
+	},
+	"credentials": {
+		"issuer": "https://qa-identity.rhooster.com",
+		"clientId": "rhooster",
+		"clientSecret": "secret",
+		"scopes": "api1"
+	}
+}' )

@@ -1,8 +1,9 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using System.Data;
+using Dapper.Contrib.Extensions;
 
 namespace DataLib.Model
 {
-    public class DataAdapter
+    public class DataAdapter : IDataAdapter
     {
         [Key]
         public int Id { get; set; }
@@ -11,9 +12,13 @@ namespace DataLib.Model
 
         public string Name { get; set; }
 
+        public string Endpoint { get; set; }
+
+        public string Metadata { get; set; }
+
         public bool IsRowActive { get; set; }
 
         [Computed]
-        public DataAdapterTypes AdapterType { get; set; }
+        public DataAdapterType AdapterType { get; set; }
     }
 }

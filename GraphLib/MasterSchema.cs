@@ -1,4 +1,5 @@
 ﻿using GraphLib.Interfaces;
+using GraphQL;
 using GraphQL.Types;
 
 namespace GraphLib

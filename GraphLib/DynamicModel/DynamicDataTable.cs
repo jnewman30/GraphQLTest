@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace GraphLib.DynamicModel
 {
-    public class DynamicTable
+    public class DynamicDataTable
     {
         public string Name { get; set; }
 

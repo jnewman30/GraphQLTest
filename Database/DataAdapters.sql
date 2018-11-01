@@ -1,8 +1,10 @@
 ﻿CREATE TABLE [dbo].[DataAdapters]
 (
-	[Id] BIGINT NOT NULL PRIMARY KEY, 
+	[Id] BIGINT NOT NULL PRIMARY KEY IDENTITY, 
     [AdapterTypeId] INT NOT NULL, 
-    [Name] NVARCHAR(255) NOT NULL, 
+    [Name] NVARCHAR(255) NOT NULL,
+	[Endpoint] NVARCHAR(MAX) NOT NULL,
+	[Metadata] NVARCHAR(MAX),
     [IsRowActive] BIT NOT NULL DEFAULT 1, 
     CONSTRAINT [FK_DataAdapters_DataAdapterTypes] FOREIGN KEY ([AdapterTypeId]) REFERENCES [DataAdapterTypes]([Id])
 ) AS Node
