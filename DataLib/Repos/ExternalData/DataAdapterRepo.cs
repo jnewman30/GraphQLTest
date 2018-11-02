@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dapper;
 using Dapper.Contrib.Extensions;
@@ -24,7 +23,7 @@ namespace DataLib.Repos.ExternalData
             using (var conn = MasterDb.GetConnection())
             {
                 const string sql = "SELECT TOP 1 * FROM DataAdapters WHERE [Name] = @name";
-                var dataAdapter = conn.QueryFirstOrDefault<DataAdapter>(sql, new {name});
+                var dataAdapter = conn.QueryFirstOrDefault<DataAdapter>(sql, new { name });
                 dataAdapter.AdapterType = conn.Get<DataAdapterType>(dataAdapter.AdapterTypeId);
                 return dataAdapter;
             }

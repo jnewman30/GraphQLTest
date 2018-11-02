@@ -30,15 +30,14 @@ namespace GraphLib
 
             Field<DataAdapterGraphType>("dataAdapter",
                                         arguments: new QueryArguments(
-                                            new QueryArgument<StringGraphType> {Name = "name"}
+                                            new QueryArgument<StringGraphType> { Name = "name" }
                                         ),
                                         resolve: QueryDataAdapterByName);
 
-
             Field<DataAdapterResultGraphType>("externalData",
                                         arguments: new QueryArguments(
-                                            new QueryArgument<StringGraphType> {Name = "adapterName"},
-                                            new QueryArgument<StringGraphType> {Name = "parameters"}
+                                            new QueryArgument<StringGraphType> { Name = "adapterName" },
+                                            new QueryArgument<StringGraphType> { Name = "parameters" }
                                         ),
                                         resolve: QueryDataAdapter);
         }

@@ -191,27 +191,38 @@ INSERT INTO DataAdapterTypes ( [Id], [Name] ) VALUES ( 1, 'GraphQL' )
 SET IDENTITY_INSERT DataAdapterTypes OFF
 
 INSERT INTO DataAdapters ( [AdapterTypeId], [Name], [Endpoint], [Metadata] ) 
-VALUES ( 1, 'UserTest', 'https://qa.rhooster.com/services/api/graph/query',
+VALUES ( 1, 'UserTest', 'http://localhost:26122/api/graph/query',
 '{
-	"query": "{
-		queryDts( $entity: String!, table: String! ) { 
-			id 
-			name 
-			daysFromAppointment 
-			sender 
-			emailTemplateId 
-			fromNumber 
-			smsTemplateId 
+	"query": "
+		query queryDts ($entity: String!, $table: String!) { 
+			queryDts (entity: $entity, table: $table) {
+				model {
+					name
+					displayName
+					fields {
+						name
+						displayName
+						dataType
+
+						size
+						precision
+						isPrimaryKey
+						isIdentity
+					}
+				}
+				data
+			}
 		} 
-	}",
+	",
 	"variables": {
 		"entity": "The Vision Clinic",
 		"table": "EHRNotificationSettings"
 	},
 	"credentials": {
-		"issuer": "https://qa-identity.rhooster.com",
+		"issuer": "https://localhost:5000",
 		"clientId": "rhooster",
 		"clientSecret": "secret",
 		"scopes": "api1"
 	}
-}' )
+}
+' )

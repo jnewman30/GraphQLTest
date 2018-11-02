@@ -18,11 +18,11 @@
     "GraphQLTest": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000/ui/voyager",
+      "launchUrl": "http://localhost:5002/ui/voyager",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5000"
+      "applicationUrl": "http://localhost:5002"
     }
   }
 }

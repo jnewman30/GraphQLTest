@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using DataLib.Model;
@@ -7,6 +6,7 @@ using GraphQL.Client;
 using GraphQL.Common.Request;
 using IdentityModel.Client;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DataLib.Repos.ExternalData
 {
@@ -15,7 +15,7 @@ namespace DataLib.Repos.ExternalData
         public async Task<DataAdapterResult> Read(IDataAdapter dataAdapter, dynamic parameters)
         {
             var adapterMetadata = JsonConvert
-               .DeserializeObject<GraphQLDataAdapterMetadata>(
+                .DeserializeObject<GraphQLDataAdapterMetadata>(
                     dataAdapter.Metadata);
 
             var authToken = await GetAuthenticationTokenAsync(adapterMetadata);
@@ -25,13 +25,19 @@ namespace DataLib.Repos.ExternalData
             graphClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
             var request = new GraphQLRequest
-                          {
-                              Query = adapterMetadata.Query,
-                              Variables = adapterMetadata.Variables
-                          };
+            {
+                Query = adapterMetadata.Query,
+                Variables = adapterMetadata.Variables
+            };
 
             var response = await graphClient.PostAsync(request);
-            var result = new DataAdapterResult();
+
+            var dataResults = response.Data as JToken;
+            var data = dataResults.ToValueDictionary();
+            var result = new DataAdapterResult
+            {
+                Rows = new[] { new DataAdapterResultRow { Fields = data } }
+            };
 
             return result;
         }
